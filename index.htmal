@@ -4,26 +4,82 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Planning App – iPhone 16 Portrait</title>
-  <!-- 저장소명이 planner-app 라면 프로젝트 페이지 기준 경로를 이렇게 고정 -->
-  <base href="/planner-app/">
   <style>
+    /* 전역 리셋 */
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; }
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-           background:#0f172a; display:grid; place-items:center; }
-    .device{ width:393px; height:852px; max-width:100vw; max-height:100dvh;
-             border-radius:36px; overflow:hidden; background:#fff; box-shadow:0 24px 80px rgba(0,0,0,.55); }
-    .app{ height:100%; padding:16px; }
-    .hero{ width:100%; aspect-ratio:393/220; object-fit:cover; display:block; border-radius:16px; margin-bottom:12px; }
-    .card{ border:1px solid rgba(0,0,0,.08); border-radius:16px; padding:16px; margin:12px 0; box-shadow:0 6px 18px rgba(0,0,0,.06); }
-    .button{ display:inline-block; padding:12px 16px; border-radius:12px; background:#5b21b6; color:#fff; text-decoration:none; font-weight:600; }
+
+    /* 페이지 배경 + 가운데 정렬 */
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #0f172a;
+      display: grid;
+      place-items: center;
+    }
+
+    /* iPhone 16 논리 뷰포트(393×852) 프레임 */
+    .device {
+      width: 393px;
+      height: 852px;
+      max-width: 100vw;
+      max-height: 100dvh;      /* 모바일 주소창 높이 변동 대응 */
+      border-radius: 36px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 24px 80px rgba(0,0,0,.55);
+      aspect-ratio: 393 / 852; /* 창이 작아질 때 비율 유지 */
+    }
+
+    /* 앱 캔버스 */
+    .app {
+      height: 100%;
+      padding: 16px;           /* 필요시 safe-area 패딩 추가 가능 */
+    }
+
+    /* 히어로 이미지: 프레임 너비에 맞추고, 세로는 고정 비율로 자연스럽게 크롭 */
+    .hero {
+      width: 100%;
+      aspect-ratio: 393 / 220; /* 더 얕게 보이게 하려면 393/200 등으로 조절 */
+      object-fit: cover;
+      display: block;
+      border-radius: 16px;
+      margin-bottom: 12px;
+    }
+
+    /* 카드 컴포넌트 */
+    .card {
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 12px 0;
+      box-shadow: 0 6px 18px rgba(0,0,0,.06);
+    }
+
+    /* 버튼 */
+    .button {
+      display: inline-block;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #5b21b6;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
   <main class="device">
     <section class="app">
-      <!-- 프로젝트 내부 자산: 슬래시 없이 상대경로 사용 -->
-      <img class="hero" src="images/hero.jpg" alt="오늘 일정 일러스트" loading="eager" decoding="async">
+
+      <!-- 이미지가 있으면 ./images/hero.jpg 사용, 없으면 placeholder로 자동 대체 -->
+      <img
+        class="hero"
+        src="./images/hero.jpg"
+        
+        loading="eager"
+        decoding="async"
+        onerror="this.onerror=null;this.src='https://via.placeholder.com/1179x660.png?text=Hero+Image';"
+      >
 
       <div class="card">
         <strong>오늘의 할 일</strong>
@@ -32,6 +88,7 @@
         </p>
         <a class="button" href="#">새 작업 추가</a>
       </div>
+
     </section>
   </main>
 </body>
