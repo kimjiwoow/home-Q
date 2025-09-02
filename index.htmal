@@ -8,7 +8,6 @@
     /* 전역 리셋 */
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; }
-
     /* 페이지 배경 + 가운데 정렬 */
     body {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -16,7 +15,6 @@
       display: grid;
       place-items: center;
     }
-
     /* iPhone 16 논리 뷰포트(393×852) 프레임 */
     .device {
       width: 393px;
@@ -29,13 +27,11 @@
       box-shadow: 0 24px 80px rgba(0,0,0,.55);
       aspect-ratio: 393 / 852; /* 창이 작아질 때 비율 유지 */
     }
-
     /* 앱 캔버스 */
     .app {
       height: 100%;
       padding: 16px;           /* 필요시 safe-area 패딩 추가 가능 */
     }
-
     /* 히어로 이미지: 프레임 너비에 맞추고, 세로는 고정 비율로 자연스럽게 크롭 */
     .hero {
       width: 100%;
@@ -44,8 +40,8 @@
       display: block;
       border-radius: 16px;
       margin-bottom: 12px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
-
     /* 카드 컴포넌트 */
     .card {
       border: 1px solid rgba(0,0,0,.08);
@@ -54,7 +50,6 @@
       margin: 12px 0;
       box-shadow: 0 6px 18px rgba(0,0,0,.06);
     }
-
     /* 버튼 */
     .button {
       display: inline-block;
@@ -64,32 +59,64 @@
       color: #fff;
       text-decoration: none;
       font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+    .button:hover {
+      background: #4c1d95;
+    }
+    /* 플레이스홀더 이미지 스타일 */
+    .hero-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
   </style>
 </head>
 <body>
   <main class="device">
     <section class="app">
-
-      <!-- 이미지가 있으면 ./images/hero.jpg 사용, 없으면 placeholder로 자동 대체 -->
+      <!-- imgur 히어로 이미지 -->
       <img
         class="hero"
-        src="./images/hero.jpg"
-        
+        src="https://i.imgur.com/LPJLqPG.png"
+        alt="Planning App Hero Image"
         loading="eager"
         decoding="async"
-        onerror="this.onerror=null;this.src='https://via.placeholder.com/1179x660.png?text=Hero+Image';"
+        onerror="this.style.display='none'; document.getElementById('heroFallback').style.display='flex';"
       >
-
+      <!-- 이미지 로드 실패 시 백업 -->
+      <div class="hero hero-placeholder" id="heroFallback" style="display: none;">
+        Planning App
+      </div>
+      
       <div class="card">
         <strong>오늘의 할 일</strong>
         <p style="margin:.5rem 0 1rem">
           UI는 <b>393×852(CSS px)</b> 기준으로 설계하고, 이미지 에셋은 @3x(= <b>1179×2556</b>)로 준비하세요.
         </p>
-        <a class="button" href="#">새 작업 추가</a>
+        <a class="button" href="#" onclick="addNewTask()">새 작업 추가</a>
       </div>
-
+      
+      <div class="card">
+        <strong>이미지 업로드 해결방법</strong>
+        <ul style="margin: 0.5rem 0; padding-left: 1.2rem;">
+          <li>GitHub에서 <code>images</code> 폴더를 만들고 이미지 업로드</li>
+          <li>절대 경로 사용: <code>/repository-name/images/hero.jpg</code></li>
+          <li>또는 외부 이미지 URL 사용</li>
+        </ul>
+      </div>
     </section>
   </main>
+
+  <script>
+    function addNewTask() {
+      alert('새 작업 추가 기능 - 실제 앱에서는 모달이나 새 페이지로 이동');
+    }
+  </script>
 </body>
 </html>
