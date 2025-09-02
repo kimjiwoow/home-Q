@@ -28,7 +28,7 @@
 
     .hero {
       width: 100%;
-      aspect-ratio: 393 / 220;  /* 필요시 높이 비율 조정 */
+      aspect-ratio: 393 / 220;   /* 필요시 높이 비율 조정 */
       object-fit: cover;
       display: block;
       border-radius: 16px;
@@ -58,9 +58,13 @@
   <main class="device">
     <section class="app">
       <!-- 히어로 이미지 -->
-      <img class="hero" 
-           src="https://via.placeholder.com/1179x660.png?text=Hero+Image" 
-          
+      <img
+        class="hero"
+        src="https://via.placeholder.com/1179x660.png?text=Hero+Image"
+        alt="오늘 일정 일러스트"
+        loading="eager"
+        decoding="async"
+      >
 
       <div class="card">
         <strong>오늘의 할 일</strong>
